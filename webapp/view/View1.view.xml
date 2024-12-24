@@ -1,0 +1,158 @@
+<mvc:View controllerName="ztransferposting.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" 
+    xmlns:f="sap.ui.layout.form"
+	xmlns:Table="sap.ui.table"
+	xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+       	<content>
+			<f:SimpleForm id="fSimpleForm1" layout="ResponsiveGridLayout" columnsL="3" columnsXL="2" columnsM="2" editable="true">
+				<f:content>
+					<core:Title id="title1" />
+					<Label id="idplant" text="Plant" required="true" design="Bold" />
+					<ComboBox items="{/PLANTF4}" selectionChange="onstoloc" width="150px"  id="plant" editable="true">
+						<items>
+                            <core:ListItem id="li0" text="{Plant}" key="{Plant}" />
+						</items>
+					</ComboBox>
+                    <Label id="mat"  design="Bold" text="Material" />
+					<Input width="150px" editable="true" id="idmaterial" />
+                    <Label text="St. Loc." required="true" id="loc" width="100%"  design="Bold" />
+					<ComboBox items="{modelname>/odataelementlist}" width="150px" id="idstloc" editable="true">
+						<items>
+                            <core:ListItem id="li" text="{modelname>StorageLocation}" key="{modelname>StorageLocation}" />
+						</items>
+					</ComboBox>
+                    <!-- <Input width="150px" editable="true" id="idstloc" /> -->
+                    <Label text="Batch"  id="KL" width="100%"  design="Bold" />
+                    <Input width="150px" editable="true" id="idbatch" />
+		            
+                    <core:Title id="title2" />
+					<Label text="Sales Order"  id="salesorder" width="100%"  design="Bold" />
+                    <Input width="150px" editable="true" id="idsalesorder" />
+                    <Label text="So Item"  id="soitem" width="100%"  design="Bold" />
+                    <Input width="150px" editable="true" id="idsoitem" />
+					<Label visible="{oCommonModel>/recsoitem}" id="rc" text="Rec. Loc." required="true" design="Bold" />
+					<ComboBox visible="{oCommonModel>/recsoitem}" items="{modelname>/odataelementlist}" width="150px" id="idrecloc" editable="true">
+						<items>
+                            <core:ListItem id="l" text="{modelname>StorageLocation}" key="{modelname>StorageLocation}" />
+						</items>
+					</ComboBox>
+					<!-- <Input visible="{oCommonModel>/recsoitem}" width="150px" editable="true"  id="idrecloc" /> -->
+                    <Label visible="{oCommonModel>/sloc}" id="rs" text="Rec. So. " required="true" design="Bold" />
+					<Input visible="{oCommonModel>/sloc}" width="150px" editable="true"  id="idrecso" />
+                    <Label visible="{oCommonModel>/sloc}" id="rsi" text="Rec. So. Item " required="true" design="Bold" />
+					<Input visible="{oCommonModel>/sloc}" width="150px" editable="true"  id="idrecsitem" />
+					<Label text="Stock"  id="dt" width="100%"  design="Bold" />
+					<Input width="150px" placeholder="From" editable="true" id="idstockfrom" />
+					<Input width="150px" placeholder="To" editable="true" id="idstockto" />
+                  
+					<core:Title id="title3" /> 
+                    <Label id="selc" text="Selection" required="true" design="Bold" />
+			              <VBox  id="vbox">
+                                <items>
+                                    <RadioButtonGroup select="onChangeAction" id="idActionRadioBtnGroup">
+                                        <buttons>
+                                            <RadioButton id="sloc" text="Sloc To Sloc"/>
+                                            <RadioButton id="so" text="SO To SO"/>
+                                        </buttons>
+                                    </RadioButtonGroup>
+                                </items>
+                            </VBox>
+					<Label id="go" ></Label>
+					<Button text="Add" press="CallBackendData"  width="60px" id="btn1" ></Button>
+				</f:content>
+			</f:SimpleForm>
+			<Table:Table class="CssForTable" selectionBehavior="Row"  id="table1" rows="{oTableDataModel1>/aTableData1}">
+				<Table:columns>
+                    <Table:Column id="tab11" width="9rem">
+						<Label id="Lab11" design="Bold" text="Plant"></Label>
+						<Table:template>
+							<Input id="inp11" value="{oTableDataModel1>Plant}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab1" width="9rem">
+						<Label id="Lab" design="Bold" text="Material"></Label>
+						<Table:template>
+							<Input id="inp1" value="{oTableDataModel1>mat}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab2" width="10rem">
+						<Label id="Lab1" design="Bold" text="Material Desc."></Label>
+						<Table:template>
+						   <Input id="inp2" value="{oTableDataModel1>matdesc}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab3" width="7rem">
+						<Label id="Lab2" design="Bold" text="St Loc"></Label>
+						<Table:template>
+							<Input id="inp3" value="{oTableDataModel1>stloc}"  editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab111" width="6rem">
+						<Label id="Lab111" design="Bold" text="Stock Qty"></Label>
+						<Table:template>
+							<Input  id="inp511" value="{oTableDataModel1>stockqty}" editable="true"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab5" width="10rem">
+						<Label id="Lab4" design="Bold" text="Batch"></Label>
+						<Table:template>
+							<Input  id="inp5" value="{oTableDataModel1>Batch}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab7" width="7rem">
+						<Label id="Lab7" design="Bold" text="Sales Order"></Label>
+						<Table:template>
+							<Input id="inp7" value="{oTableDataModel1>salesoder}"  editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab8" width="7rem">
+						<Label id="Lab8" design="Bold" text="SO Item"></Label>
+						<Table:template>
+							<Input id="inp8" value="{oTableDataModel1>Soitem}"  editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="tab121" width="7rem">
+						<Label id="Lab131" design="Bold" text="Grade"></Label>
+						<Table:template>
+							<Input id="inp183" value="{oTableDataModel1>Grade}"  editable="false"/>
+						</Table:template>
+					</Table:Column>
+                    <Table:Column id="tab6" width="7rem">
+						<Label id="Lab5" design="Bold" text="Rec Loc"></Label>
+						<Table:template>
+							<Input id="inp6" value="{oTableDataModel1>recloc}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+                    <Table:Column id="tab9" width="7rem">
+						<Label id="Lab9" design="Bold" text="Rec SO"></Label>
+						<Table:template>
+							<Input id="inp9" value="{oTableDataModel1>recso}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+                    <Table:Column id="tab10" width="7rem">
+						<Label id="Lab10" design="Bold" text="Rec SO Item"></Label>
+						<Table:template>
+							<Input id="inp10" value="{oTableDataModel1>recsoitem}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+
+					<Table:Column id="tab12" width="7rem">
+						<Label id="Lab12" design="Bold" text="Set Code"></Label>
+						<Table:template>
+							<Input id="inp12" value="{oTableDataModel1>SETCODE}" editable="true"/>
+						</Table:template>
+					</Table:Column>
+				</Table:columns>
+			</Table:Table>
+		</content>
+		<footer>
+			<Bar id="bar">
+				<contentRight>
+					<Button  id="buton1" icon="sap-icon://save" text="Save" type="Emphasized" press="savedata" visible="{}"/>
+				</contentRight>
+			</Bar>
+		</footer>
+    </Page>
+</mvc:View>
